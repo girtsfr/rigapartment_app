@@ -23,9 +23,9 @@ rent_data = load_rent_data()
 # max_floors = int(sale_data['floor'].max())
 # max_rooms = int(sale_data['rooms'].max())
 # max_size = int(sale_data['square_m'].max())
-max_floors = int(33)
+max_floors = int(23)
 max_rooms = int(6)
-max_size = int(640)
+max_size = int(250)
 
 
 ######################################################################
