@@ -5,8 +5,17 @@ import plotly.express as px
  
 ######################################################################
 ### IMPORTING DATA ###
-sale_data = pd.read_pickle('sale_data.pkl')
-rent_data = pd.read_pickle('rent_data.pkl')
+@st.cache_data
+def load_sale_data():
+    return pd.read_pickle('sale_data.pkl')
+
+@st.cache_data
+def load_rent_data():
+    return pd.read_pickle('rent_data.pkl')
+
+# Use the cached functions to load data
+sale_data = load_sale_data()
+rent_data = load_rent_data()
 
 
 ######################################################################
@@ -35,31 +44,30 @@ if select_region != 'All regions':
 ### FLOOR SELECTION
 select_floor = st.sidebar.slider('Select floor:', value=[1, max_floors], min_value = 1, max_value = max_floors)
 
-sale_data = sale_data[sale_data['floor'] >= select_floor[0]]
-sale_data = sale_data[sale_data['floor'] <= select_floor[1]]
-
-rent_data = rent_data[rent_data['floor'] >= select_floor[0]]
-rent_data = rent_data[rent_data['floor'] <= select_floor[1]]
-
-
 ### ROOM COUNT SELECTION
 select_rooms = st.sidebar.slider('Select room count:', value=[1, max_rooms], min_value = 1, max_value = max_rooms)
-
-sale_data = sale_data[sale_data['rooms'] >= select_rooms[0]]
-sale_data = sale_data[sale_data['rooms'] <= select_rooms[1]]
-
-rent_data = rent_data[rent_data['rooms'] >= select_rooms[0]]
-rent_data = rent_data[rent_data['rooms'] <= select_rooms[1]]
-
 
 ### SIZE SELECTION
 select_size = st.sidebar.slider('Select size (square meters):', value=[1, max_size], min_value = 1, max_value = max_size)
 
-sale_data = sale_data[sale_data['square_m'] >= select_size[0]]
-sale_data = sale_data[sale_data['square_m'] <= select_size[1]]
+### DATA FILTERING
+sale_data = sale_data[
+    (sale_data['floor'] >= select_floor[0]) &
+    (sale_data['floor'] <= select_floor[1]) &
+    (sale_data['rooms'] >= select_rooms[0]) &
+    (sale_data['rooms'] <= select_rooms[1]) &
+    (sale_data['square_m'] >= select_size[0]) &
+    (sale_data['square_m'] <= select_size[1])
+]
 
-rent_data = rent_data[rent_data['square_m'] >= select_size[0]]
-rent_data = rent_data[rent_data['square_m'] <= select_size[1]]
+rent_data = rent_data[
+    (rent_data['floor'] >= select_floor[0]) &
+    (rent_data['floor'] <= select_floor[1]) &
+    (rent_data['rooms'] >= select_rooms[0]) &
+    (rent_data['rooms'] <= select_rooms[1]) &
+    (rent_data['square_m'] >= select_size[0]) &
+    (rent_data['square_m'] <= select_size[1])
+]
 
 
 ######################################################################
