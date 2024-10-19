@@ -5,17 +5,8 @@ import plotly.express as px
  
 ######################################################################
 ### IMPORTING DATA ###
-@st.cache_data
-def load_sale_data():
-    return pd.read_pickle('sale_data.pkl')
-
-@st.cache_data
-def load_rent_data():
-    return pd.read_pickle('rent_data.pkl')
-
-# Use the cached functions to load data
-sale_data = load_sale_data()
-rent_data = load_rent_data()
+sale_data = pd.read_pickle('sale_data.pkl')
+rent_data = pd.read_pickle('rent_data.pkl')
 
 
 ######################################################################
