@@ -88,7 +88,8 @@ rent_summary = rent_summary.agg(
 ######################################################################
 ### TABS ###
 # sale_tab, rent_tab = st.tabs(['FOR SALE', 'FOR RENT'])
-sale_tab, rent_tab, yields_tab, about_tab = st.tabs(['FOR SALE', 'FOR RENT', 'YIELDS', 'ABOUT THE APP'])
+# sale_tab, rent_tab, yields_tab, about_tab = st.tabs(['FOR SALE', 'FOR RENT', 'YIELDS', 'ABOUT THE APP'])
+sale_tab, rent_tab, about_tab = st.tabs(['FOR SALE', 'FOR RENT', 'ABOUT THE APP'])
 
 ######################################################################
 ### FOR SALE TAB ###
@@ -127,17 +128,17 @@ rent_tab.plotly_chart(fig_rent_price, theme="streamlit")
 
 
 ######################################################################
-### YIELDS TAB ###
+# ### YIELDS TAB ###
 
-yield_annual = ((rent_summary['mean_price_per_square'] * 12) / sale_summary['mean_price_per_square']) * 100
+# yield_annual = ((rent_summary['mean_price_per_square'] * 12) / sale_summary['mean_price_per_square']) * 100
 
-### CHARTS
-yields_tab.subheader('Annual yield')
-yields_tab.caption('Below chart shows the annual yield of renting out an apartment, according to average rent and sale price per square meter. The formula is:')
-yields_tab.caption('(AVG rent price per square meter * 12)  /  AVG sale price per square meter')
+# ### CHARTS
+# yields_tab.subheader('Annual yield')
+# yields_tab.caption('Below chart shows the annual yield of renting out an apartment, according to average rent and sale price per square meter. The formula is:')
+# yields_tab.caption('(AVG rent price per square meter * 12)  /  AVG sale price per square meter')
 
-fig_yield = px.line(yield_annual, y='mean_price_per_square', labels={'mean_price_per_square':'annual yield (%)'})
-yields_tab.plotly_chart(fig_yield, theme="streamlit")
+# fig_yield = px.line(yield_annual, y='mean_price_per_square', labels={'mean_price_per_square':'annual yield (%)'})
+# yields_tab.plotly_chart(fig_yield, theme="streamlit")
 
 
 ######################################################################
