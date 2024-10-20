@@ -104,7 +104,7 @@ fig_sale_count = px.line(sale_summary, y='count')
 sale_tab.plotly_chart(fig_sale_count, theme="streamlit")
 
 sale_tab.subheader('Average price per square meter')
-sale_tab.caption('Below chart shows what was the average price per square meter at particular dates')
+sale_tab.caption('Below chart shows the average price per square meter at particular dates')
 fig_sale_price = px.line(sale_summary, y='mean_price_per_square', labels={'mean_price_per_square':'mean price per square meter'})
 sale_tab.plotly_chart(fig_sale_price, theme="streamlit")
 
@@ -122,7 +122,7 @@ fig_rent_count = px.line(rent_summary, y='count')
 rent_tab.plotly_chart(fig_rent_count, theme="streamlit")
 
 rent_tab.subheader('Average price per square meter')
-rent_tab.caption('Below chart shows what was the average price per square meter at particular dates')
+rent_tab.caption('Below chart shows the average price per square meter at particular dates')
 fig_rent_price = px.line(rent_summary, y='mean_price_per_square', labels={'mean_price_per_square':'mean price per square meter'})
 rent_tab.plotly_chart(fig_rent_price, theme="streamlit")
 
