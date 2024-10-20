@@ -88,7 +88,7 @@ rent_summary = rent_summary.agg(
 ######################################################################
 ### TABS ###
 # sale_tab, rent_tab = st.tabs(['FOR SALE', 'FOR RENT'])
-sale_tab, rent_tab, yields_tab = st.tabs(['FOR SALE', 'FOR RENT', 'YIELDS'])
+sale_tab, rent_tab, yields_tab, about = st.tabs(['FOR SALE', 'FOR RENT', 'YIELDS', 'ABOUT THE APP'])
 
 ######################################################################
 ### FOR SALE TAB ###
@@ -97,7 +97,7 @@ sale_tab.header('Apartments for sale')
 sale_tab.caption('')
 
 ### CHARTS
-sale_tab.subheader('Count of listings')
+sale_tab.subheader('Number of Active Listings')
 sale_tab.caption('Below chart shows how many apartments were listed for sale at particular dates')
 fig_sale_count = px.line(sale_summary, y='count')
 sale_tab.plotly_chart(fig_sale_count, theme="streamlit")
@@ -115,7 +115,7 @@ rent_tab.header('Apartments for rent')
 rent_tab.caption('')
 
 ### CHARTS
-rent_tab.subheader('Count of listings')
+rent_tab.subheader('Number of Active Listings')
 rent_tab.caption('Below chart shows how many apartments were listed for rent at particular dates')
 fig_rent_count = px.line(rent_summary, y='count')
 rent_tab.plotly_chart(fig_rent_count, theme="streamlit")
@@ -138,3 +138,11 @@ yields_tab.caption('(AVG rent price per square meter * 12)  /  AVG sale price pe
 
 fig_yield = px.line(yield_annual, y='mean_price_per_square', labels={'mean_price_per_square':'annual yield (%)'})
 yields_tab.plotly_chart(fig_yield, theme="streamlit")
+
+
+######################################################################
+### ABOUT THE APP TAB ###
+sale_tab.header('Apartments for sale')
+sale_tab.caption('This app provides a summarized overview of apartment listings posted on the website ss.lv. It allows users to view the number of apartment advertisements active at the end of each day, as well as the average price per square meter for these listings.')
+sale_tab.caption('You can toggle between apartments for sale and for rent, and the data displayed in the charts can be customized using the filters on the left-hand sidebar. These filters allow you to narrow down the listings by specific city regions, apartment size, room count, and floor.')
+sale_tab.caption('New information is added at the end of each day.')
