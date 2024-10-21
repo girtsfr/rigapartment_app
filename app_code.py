@@ -150,7 +150,7 @@ rent_tab.plotly_chart(fig_rent_price, theme="streamlit")
 
 ######################################################################
 ### ABOUT THE APP TAB ###
-about_tab.header('Apartments for sale')
+about_tab.header('About the app')
 about_tab.caption('This app provides a summarized overview of apartment listings posted on the website ss.lv. It allows users to view the number of apartment advertisements active at the end of each day, as well as the average price per square meter for these listings.')
 about_tab.caption('You can toggle between apartments for sale and for rent, and the data displayed in the charts can be customized using the filters on the left-hand sidebar. These filters allow you to narrow down the listings by specific city regions, apartment size, room count, and floor.')
 about_tab.caption('New information is added at the end of each day.')
