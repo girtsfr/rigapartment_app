@@ -4,25 +4,34 @@ import numpy as np
 import plotly.express as px
  
 ######################################################################
-### IMPORTING DATA ###
-
-# CACHE DATA
-# @st.cache_data
-# def load_sale_data():
-#     return pd.read_pickle('sale_data.pkl')
-
-# @st.cache_data
-# def load_rent_data():
-#     return pd.read_pickle('rent_data.pkl')
-
-# sale_data = load_sale_data()
-# rent_data = load_rent_data()
-
-
 
 # LOAD DATA
-sale_data = pd.read_pickle('sale_data.pkl')
-rent_data = pd.read_pickle('rent_data.pkl')
+# sale_data = pd.read_pickle('sale_data.pkl')
+# rent_data = pd.read_pickle('rent_data.pkl')
+
+
+# FOR SALE FILES
+sale_files = [
+    'sale_data_hist_1.pkl',
+    'sale_data_hist_2.pkl',
+    'sale_data_hist_3.pkl',
+    'sale_data_hist_4.pkl',
+    'sale_data.pkl'
+]
+
+sale_dfs = [pd.read_pickle(file) for file in sale_files]
+sale_data = pd.concat(sale_dfs, ignore_index=True)
+
+
+
+# FOR RENT FILES
+rent_files = [
+    'rent_data_hist_1.pkl',
+    'rent_data.pkl'
+]
+
+rent_dfs = [pd.read_pickle(file) for file in rent_files]
+rent_data = pd.concat(rent_dfs, ignore_index=True)
 
 
 ######################################################################
