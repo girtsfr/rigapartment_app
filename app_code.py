@@ -91,4 +91,74 @@ sale_tab, rent_tab, yields_tab, about_tab = st.tabs(['FOR SALE', 'FOR RENT', 'YI
 sale_tab.header('Apartments for sale')
 sale_tab.caption('')
 
-# Number
+# Number of Active Listings with YoY
+sale_tab.subheader('Number of Active Listings')
+sale_tab.caption('Below chart shows how many apartments were listed for sale at particular dates with YoY % change')
+fig_sale_count = px.line(sale_summary, 
+                        y=['count', 'count_yoy'],
+                        labels={'value': 'Count / YoY %', 'variable': 'Metric'},
+                        title='Listings Count and YoY % Change')
+fig_sale_count.update_traces(mode='lines+markers')
+fig_sale_count.update_layout(yaxis2=dict(title='YoY %', overlaying='y', side='right'))
+sale_tab.plotly_chart(fig_sale_count, theme="streamlit")
+
+# Median price per square meter with YoY
+sale_tab.subheader('Median price per square meter')
+sale_tab.caption('Below chart shows the median price per square meter at particular dates with YoY % change')
+fig_sale_price = px.line(sale_summary, 
+                        y=['median_price_per_square', 'price_yoy'],
+                        labels={'value': 'Price / YoY %', 'variable': 'Metric'},
+                        title='Median Price and YoY % Change')
+fig_sale_price.update_traces(mode='lines+markers')
+fig_sale_price.update_layout(yaxis2=dict(title='YoY %', overlaying='y', side='right'))
+sale_tab.plotly_chart(fig_sale_price, theme="streamlit")
+
+######################################################################
+# FOR RENT TAB
+rent_tab.header('Apartments for rent')
+rent_tab.caption('')
+
+# Number of Active Listings with YoY
+rent_tab.subheader('Number of Active Listings')
+rent_tab.caption('Below chart shows how many apartments were listed for rent at particular dates with YoY % change')
+fig_rent_count = px.line(rent_summary,
+                        y=['count', 'count_yoy'],
+                        labels={'value': 'Count / YoY %', 'variable': 'Metric'},
+                        title='Listings Count and YoY % Change')
+fig_rent_count.update_traces(mode='lines+markers')
+fig_rent_count.update_layout(yaxis2=dict(title='YoY %', overlaying='y', side='right'))
+rent_tab.plotly_chart(fig_rent_count, theme="streamlit")
+
+# Median price per square meter with YoY
+rent_tab.subheader('Median price per square meter')
+rent_tab.caption('Below chart shows the median price per square meter at particular dates with YoY % change')
+fig_rent_price = px.line(rent_summary,
+                        y=['median_price_per_square', 'price_yoy'],
+                        labels={'value': 'Price / YoY %', 'variable': 'Metric'},
+                        title='Median Price and YoY % Change')
+fig_rent_price.update_traces(mode='lines+markers')
+fig_rent_price.update_layout(yaxis2=dict(title='YoY %', overlaying='y', side='right'))
+rent_tab.plotly_chart(fig_rent_price, theme="streamlit")
+
+######################################################################
+# YIELDS TAB
+yield_annual = ((rent_summary['median_price_per_square'] * 12) / sale_summary['median_price_per_square']) * 100
+yield_annual = pd.DataFrame(yield_annual, columns=['yield'])  # Convert Series to DataFrame
+yield_annual['yield_yoy'] = yield_annual['yield'].pct_change(periods=365) * 100
+
+yields_tab.subheader('Annual yield')
+yields_tab.caption('Below chart shows the annual yield of renting out an apartment with YoY % change')
+fig_yield = px.line(yield_annual,
+                   y=['yield', 'yield_yoy'],
+                   labels={'value': 'Yield / YoY %', 'variable': 'Metric'},
+                   title='Annual Yield and YoY % Change')
+fig_yield.update_traces(mode='lines+markers')
+fig_yield.update_layout(yaxis2=dict(title='YoY %', overlaying='y', side='right'))
+yields_tab.plotly_chart(fig_yield, theme="streamlit")
+
+######################################################################
+# ABOUT THE APP TAB (unchanged)
+about_tab.header('About the app')
+about_tab.caption('This app provides a summarized overview of apartment listings posted on the website ss.lv. It allows users to view the number of apartment advertisements active at the end of each day, as well as the median price per square meter for these listings.')
+about_tab.caption('You can toggle between apartments for sale and for rent, and the data displayed in the charts can be customized using the filters on the left-hand sidebar. These filters allow you to narrow down the listings by specific city regions, apartment size, room count, and floor.')
+about_tab.caption('New information is added at the end of each day.')
