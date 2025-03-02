@@ -119,8 +119,8 @@ sale_tab.caption('Below chart shows how many apartments were listed for sale at 
 fig_sale_count = px.line(sale_summary, y='count')
 sale_tab.plotly_chart(fig_sale_count, theme="streamlit")
 
-sale_tab.subheader('Average price per square meter')
-sale_tab.caption('Below chart shows the average price per square meter at particular dates')
+sale_tab.subheader('Median price per square meter')
+sale_tab.caption('Below chart shows the median price per square meter at particular dates')
 fig_sale_price = px.line(sale_summary, y='median_price_per_square', labels={'median_price_per_square':'median price per square meter'})
 sale_tab.plotly_chart(fig_sale_price, theme="streamlit")
 
@@ -137,8 +137,8 @@ rent_tab.caption('Below chart shows how many apartments were listed for rent at 
 fig_rent_count = px.line(rent_summary, y='count')
 rent_tab.plotly_chart(fig_rent_count, theme="streamlit")
 
-rent_tab.subheader('Average price per square meter')
-rent_tab.caption('Below chart shows the average price per square meter at particular dates')
+rent_tab.subheader('Median price per square meter')
+rent_tab.caption('Below chart shows the median price per square meter at particular dates')
 fig_rent_price = px.line(rent_summary, y='median_price_per_square', labels={'median_price_per_square':'median price per square meter'})
 rent_tab.plotly_chart(fig_rent_price, theme="streamlit")
 
@@ -150,7 +150,7 @@ yield_annual = ((rent_summary['median_price_per_square'] * 12) / sale_summary['m
 
 # ### CHARTS
 yields_tab.subheader('Annual yield')
-yields_tab.caption('Below chart shows the annual yield of renting out an apartment, according to average rent and sale price per square meter. The formula is:')
+yields_tab.caption('Below chart shows the annual yield of renting out an apartment, according to median rent and sale price per square meter. The formula is:')
 yields_tab.caption('(AVG rent price per square meter * 12)  /  AVG sale price per square meter')
 
 fig_yield = px.line(yield_annual, y='median_price_per_square', labels={'median_price_per_square':'annual yield (%)'})
@@ -160,6 +160,6 @@ yields_tab.plotly_chart(fig_yield, theme="streamlit")
 ######################################################################
 ### ABOUT THE APP TAB ###
 about_tab.header('About the app')
-about_tab.caption('This app provides a summarized overview of apartment listings posted on the website ss.lv. It allows users to view the number of apartment advertisements active at the end of each day, as well as the average price per square meter for these listings.')
+about_tab.caption('This app provides a summarized overview of apartment listings posted on the website ss.lv. It allows users to view the number of apartment advertisements active at the end of each day, as well as the median price per square meter for these listings.')
 about_tab.caption('You can toggle between apartments for sale and for rent, and the data displayed in the charts can be customized using the filters on the left-hand sidebar. These filters allow you to narrow down the listings by specific city regions, apartment size, room count, and floor.')
 about_tab.caption('New information is added at the end of each day.')
