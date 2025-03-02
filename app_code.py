@@ -91,13 +91,13 @@ rent_data = rent_data[
 sale_summary = sale_data.groupby('time')
 sale_summary = sale_summary.agg(
                                 count = ('rooms', 'count'),
-                                mean_price_per_square = ('price_per_square_m', 'mean')
+                                median_price_per_square = ('price_per_square_m', 'median')
                                 )
 
 rent_summary = rent_data.groupby('time')
 rent_summary = rent_summary.agg(
                                 count = ('rooms', 'count'),
-                                mean_price_per_square = ('price_per_square_m', 'mean')
+                                median_price_per_square = ('price_per_square_m', 'median')
                                 )
 
 
@@ -121,7 +121,7 @@ sale_tab.plotly_chart(fig_sale_count, theme="streamlit")
 
 sale_tab.subheader('Average price per square meter')
 sale_tab.caption('Below chart shows the average price per square meter at particular dates')
-fig_sale_price = px.line(sale_summary, y='mean_price_per_square', labels={'mean_price_per_square':'mean price per square meter'})
+fig_sale_price = px.line(sale_summary, y='median_price_per_square', labels={'median_price_per_square':'median price per square meter'})
 sale_tab.plotly_chart(fig_sale_price, theme="streamlit")
 
 
@@ -139,21 +139,21 @@ rent_tab.plotly_chart(fig_rent_count, theme="streamlit")
 
 rent_tab.subheader('Average price per square meter')
 rent_tab.caption('Below chart shows the average price per square meter at particular dates')
-fig_rent_price = px.line(rent_summary, y='mean_price_per_square', labels={'mean_price_per_square':'mean price per square meter'})
+fig_rent_price = px.line(rent_summary, y='median_price_per_square', labels={'median_price_per_square':'median price per square meter'})
 rent_tab.plotly_chart(fig_rent_price, theme="streamlit")
 
 
 ######################################################################
 # ### YIELDS TAB ###
 
-yield_annual = ((rent_summary['mean_price_per_square'] * 12) / sale_summary['mean_price_per_square']) * 100
+yield_annual = ((rent_summary['median_price_per_square'] * 12) / sale_summary['median_price_per_square']) * 100
 
 # ### CHARTS
 yields_tab.subheader('Annual yield')
 yields_tab.caption('Below chart shows the annual yield of renting out an apartment, according to average rent and sale price per square meter. The formula is:')
 yields_tab.caption('(AVG rent price per square meter * 12)  /  AVG sale price per square meter')
 
-fig_yield = px.line(yield_annual, y='mean_price_per_square', labels={'mean_price_per_square':'annual yield (%)'})
+fig_yield = px.line(yield_annual, y='median_price_per_square', labels={'median_price_per_square':'annual yield (%)'})
 yields_tab.plotly_chart(fig_yield, theme="streamlit")
 
 
